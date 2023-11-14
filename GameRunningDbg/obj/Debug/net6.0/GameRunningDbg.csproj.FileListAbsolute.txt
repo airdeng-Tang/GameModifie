@@ -1,0 +1,14 @@
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\bin\Debug\net6.0\GameRunningDbg.exe
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\bin\Debug\net6.0\GameRunningDbg.deps.json
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\bin\Debug\net6.0\GameRunningDbg.runtimeconfig.json
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\bin\Debug\net6.0\GameRunningDbg.dll
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\bin\Debug\net6.0\GameRunningDbg.pdb
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.GeneratedMSBuildEditorConfig.editorconfig
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.AssemblyInfoInputs.cache
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.AssemblyInfo.cs
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.csproj.CoreCompileInputs.cache
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.dll
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\refint\GameRunningDbg.dll
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.pdb
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.genruntimeconfig.cache
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\ref\GameRunningDbg.dll

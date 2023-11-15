@@ -1,4 +1,8 @@
 ﻿using GameRunningDbg.Core;
+using GameRunningDbg.GameInfo;
+using GameRunningDbg.GameInfo.Base;
+using GameRunningDbg.JSON;
+using GameRunningDbg.Manager;
 using GameRunningDbg.Tool;
 using HunterPie.Core.System.Windows.Native;
 using System;
@@ -9,50 +13,51 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static GameRunningDbg.JSON.infoSim;
 
 namespace GameRunningDbg.Model
 {
     public class ProcessModel : Singleton<ProcessModel>
     {
-        public string name;
+        public string name = "";
         public Process module;
         bool isRunning = false;
+
+        public Dictionary<string, Dictionary<string, object>> JsonInfo 
+            = new Dictionary<string, Dictionary<string, object>>();
 
         /// <summary>
         /// 主程序基址
         /// </summary>
         public IntPtr exe_p;
 
-        //UnityPlayer.dll模块基址
-        ProcessModule UnityPlayerDll;
-
-
-        public IntPtr UnityPlayerDll_p;
         /// <summary>
-        /// 金币地址
+        /// 游戏信息
         /// </summary>
-        public IntPtr PlayerGolds_p;
-
-        public Gold player_gold;
+        public GameBase game_info;
         public void Init()
         {
             isRunning = true;
+
+            JsonInfo.Add("hollow_knight", new Dictionary<string, object>());
+            JsonInfo["hollow_knight"].Add("GoldCoinModule", "UnityPlayer.dll");
+            int[] GoldsMemoryOffset = { 0x019B8BE0, 0x10, 0x88, 0x28, 0x20, 0xA0, 0x30, 0x1C4 };
+            JsonInfo["hollow_knight"].Add("GoldsMemoryOffset", GoldsMemoryOffset);
+
+
+            JsonInfo.Add("MonsterHunterWorld", new Dictionary<string, object>());
+            JsonInfo["MonsterHunterWorld"].Add("GoldCoinModule", "MonsterHunterWorld.exe");
+            int[] GoldsMemoryOffset2 = { 0x05011710, 0xA8, 0x94 };
+            JsonInfo["MonsterHunterWorld"].Add("GoldsMemoryOffset", GoldsMemoryOffset2);
+            JsonInfo["MonsterHunterWorld"].Add("PtsCoinModule", "MonsterHunterWorld.exe");
+            int[] PtsMemoryOffset = { 0x05011710, 0xA8, 0x98 };
+            JsonInfo["MonsterHunterWorld"].Add("PtsMemoryOffset", PtsMemoryOffset);
         }
 
-        public void SetPlayer(ProcessModule pm , IntPtr jb)
+        public void SetPlayer(IntPtr jb)
         {
-            if (pm == null)
-            {
-                return;
-            }
             this.exe_p = jb;
-            UnityPlayerDll = pm;
-
-            UnityPlayerDll_p = UnityPlayerDll.BaseAddress;
-
-            player_gold = new Gold(this);
-
-            player_gold.get_golds(this.exe_p);
+            game_info.init_info();
         }
 
         /// <summary>
@@ -63,8 +68,5 @@ namespace GameRunningDbg.Model
         {
             return new byte[Marshal.SizeOf<T>()];
         }
-        //public process() { 
-            
-        //}
     }
 }

@@ -1,4 +1,6 @@
-﻿using GameRunningDbg.Model;
+﻿using GameRunningDbg.GameInfo.Game;
+using GameRunningDbg.Model;
+using GameRunningDbg.Tool;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GameRunningDbg.Core
 {
-    public class Update
+    public class Update : Singleton<Update>
     {
         List<Thread> threads;
 
@@ -42,8 +44,8 @@ namespace GameRunningDbg.Core
         {
             while(true)
             {
-                Thread.Sleep(100);
-                ProcessModel.Instance.player_gold.update_golds();
+                Thread.Sleep(1000);
+                ProcessModel.Instance.game_info.game_update();
             }
         }
 
@@ -54,9 +56,9 @@ namespace GameRunningDbg.Core
         {
             while (true)
             {
+                Console.Write(">");
                 string i = Console.ReadLine();
                 InputProc(i);
-                //Thread.Sleep(1000);
             }
         }
         /// <summary>
@@ -65,19 +67,55 @@ namespace GameRunningDbg.Core
         /// <param name="i"></param>
         void InputProc(string i)
         {
-            if (i == "set golds")
+            if(ProcessModel.Instance.name == "MonsterHunterWorld")
             {
-                Console.WriteLine("请输入想要更改的金币");
-                int.TryParse(Console.ReadLine() , out int new_golds);
-                if (ProcessModel.Instance.player_gold.set_golds(new_golds))
+                if (i == "set golds")
                 {
-                    Console.WriteLine($"修改成功");
-                    return;
+                    Console.WriteLine("请输入想要更改的金币 :");
+                    int.TryParse(Console.ReadLine(), out int new_value);
+                    if (((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Golds.SetValue(new_value))
+                    {
+                        Console.WriteLine($"修改成功");
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"修改失败");
+                        return;
+                    }
                 }
-                else
+                else if(i == "set pts")
                 {
-                    Console.WriteLine($"修改失败");
-                    return;
+                    Console.WriteLine("请输入想要更改的调查点 :");
+                    int.TryParse(Console.ReadLine(), out int new_value);
+                    if (((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Pts.SetValue(new_value))
+                    {
+                        Console.WriteLine($"修改成功");
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"修改失败");
+                        return;
+                    }
+                }
+            }
+            else if (ProcessModel.Instance.name == "hollow_knight")
+            {
+                if (i == "set golds")
+                {
+                    Console.WriteLine("请输入想要更改的金币 :");
+                    int.TryParse(Console.ReadLine(), out int new_value);
+                    if (ProcessModel.Instance.game_info.Golds.SetValue(new_value))
+                    {
+                        Console.WriteLine($"修改成功");
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"修改失败");
+                        return;
+                    }
                 }
             }
         }

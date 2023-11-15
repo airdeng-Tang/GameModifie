@@ -12,3 +12,4 @@ D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\refint\GameRunningDb
 D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.pdb
 D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.genruntimeconfig.cache
 D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\ref\GameRunningDbg.dll
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.sourcelink.json

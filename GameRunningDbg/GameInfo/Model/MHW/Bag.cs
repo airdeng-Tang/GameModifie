@@ -365,7 +365,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         {
             foreach(var v in AllItem)
             {
-                v.Value.UpdateInfo();
+                v.Value.Update();
             }
             ShowAll();
         }

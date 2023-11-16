@@ -115,11 +115,6 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void Update()
         {
-
-        }
-        
-        public void UpdateInfo() 
-        {
             byte[] pbPtr = ProcessModel.GenericToByteArray<int>();
             Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, IdMemory, pbPtr, Marshal.SizeOf<IntPtr>(), out int _);
             ItemId = BitConverter.ToInt32(pbPtr);

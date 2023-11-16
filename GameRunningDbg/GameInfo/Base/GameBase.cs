@@ -1,4 +1,5 @@
-﻿using GameRunningDbg.Model;
+﻿using GameRunningDbg.GameInfo.Model;
+using GameRunningDbg.GameInfo.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

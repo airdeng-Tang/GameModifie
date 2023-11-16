@@ -1,4 +1,5 @@
-﻿using GameRunningDbg.GameInfo.Base;
+﻿using GameRunningDbg.GameInfo.Model;
+using GameRunningDbg.GameInfo.Model.Base;
 using HunterPie.Core.System.Windows.Native;
 using System;
 using System.Collections.Generic;
@@ -7,19 +8,19 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameRunningDbg.Model
+namespace GameRunningDbg.GameInfo.Model.MHW
 {
     /// <summary>
     /// 怪猎调查点数
     /// </summary>
-    public class Pts : MemoryBase,NeedUpdate, InitValue<Pts>
+    public class Pts : MemoryBase, NeedUpdate, InitValue<Pts>
     {
         public int Value = -1;
         public int Value_New = 0;
 
-        public Pts(int[] offsets) : base(offsets) 
+        public Pts(int[] offsets) : base(offsets)
         {
-            
+
         }
 
         public bool SetValue(int value)
@@ -30,8 +31,8 @@ namespace GameRunningDbg.Model
 
         public void Update()
         {
-            byte[] pb32 = ProcessModel.GenericToByteArray<Int32>();
-            if (Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, p, pb32, sizeof(Int32), out int i))
+            byte[] pb32 = ProcessModel.GenericToByteArray<int>();
+            if (Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, p, pb32, sizeof(int), out int i))
             {
                 PlayerGolds_p = p;
                 Value_New = BitConverter.ToInt32(pb32);
@@ -52,14 +53,14 @@ namespace GameRunningDbg.Model
             IntPtr a = IntPtr.Add(CoinModule_p, offsets[0]);
 
             // 根据内存地址访问数据
-            byte[] pbPtr = ProcessModel.GenericToByteArray<Int64>();
+            byte[] pbPtr = ProcessModel.GenericToByteArray<long>();
             for (int i = 1; i < offsets.Count; i++)
             {
                 Kernel32.ReadProcessMemory(jb, a, pbPtr, Marshal.SizeOf<IntPtr>(), out int _);
                 a = IntPtr.Add((IntPtr)BitConverter.ToInt64(pbPtr), offsets[i]);
             }
             p = a;
-            this.Update();
+            Update();
             return this;
         }
     }

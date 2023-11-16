@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameRunningDbg.GameInfo.Base
+namespace GameRunningDbg.GameInfo.Model.Base
 {
     /// <summary>
     /// 内存信息基类
@@ -45,7 +45,8 @@ namespace GameRunningDbg.GameInfo.Base
         /// </summary>
         public IntPtr PlayerGolds_p;
 
-        public MemoryBase(int[] offset) {
+        public MemoryBase(int[] offset)
+        {
             offsets = new List<int>(offset);
         }
     }

@@ -15,7 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static GameRunningDbg.JSON.infoSim;
 
-namespace GameRunningDbg.Model
+namespace GameRunningDbg.GameInfo.Model
 {
     public class ProcessModel : Singleton<ProcessModel>
     {
@@ -23,7 +23,7 @@ namespace GameRunningDbg.Model
         public Process module;
         bool isRunning = false;
 
-        public Dictionary<string, Dictionary<string, object>> JsonInfo 
+        public Dictionary<string, Dictionary<string, object>> JsonInfo
             = new Dictionary<string, Dictionary<string, object>>();
 
         /// <summary>
@@ -52,11 +52,13 @@ namespace GameRunningDbg.Model
             JsonInfo["MonsterHunterWorld"].Add("PtsCoinModule", "MonsterHunterWorld.exe");
             int[] PtsMemoryOffset = { 0x05011710, 0xA8, 0x98 };
             JsonInfo["MonsterHunterWorld"].Add("PtsMemoryOffset", PtsMemoryOffset);
+            int FirstItemBagOffsetOfGold = 0x3897C;
+            JsonInfo["MonsterHunterWorld"].Add("FirstItemBagOffsetOfGold", FirstItemBagOffsetOfGold);
         }
 
         public void SetPlayer(IntPtr jb)
         {
-            this.exe_p = jb;
+            exe_p = jb;
             game_info.init_info();
         }
 

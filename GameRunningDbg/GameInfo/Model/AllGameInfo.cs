@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameRunningDbg.GameInfo.Base
+namespace GameRunningDbg.GameInfo.Model
 {
-    public interface NeedUpdate
+    internal class AllGameInfo
     {
-        void Update();
-        bool SetValue(int value);
     }
 }

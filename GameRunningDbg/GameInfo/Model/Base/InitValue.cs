@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameRunningDbg.Model
+namespace GameRunningDbg.GameInfo.Model.Base
 {
-    internal class AllGameInfo
+    public interface InitValue<T>
     {
+        T InitValue(IntPtr jb);
     }
 }

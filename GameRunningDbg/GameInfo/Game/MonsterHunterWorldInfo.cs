@@ -1,7 +1,9 @@
 ﻿using GameRunningDbg.GameInfo.Base;
+using GameRunningDbg.GameInfo.Model;
+using GameRunningDbg.GameInfo.Model.Base;
+using GameRunningDbg.GameInfo.Model.MHW;
 using GameRunningDbg.JSON;
 using GameRunningDbg.Manager;
-using GameRunningDbg.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,22 @@ namespace GameRunningDbg.GameInfo.Game
 {
     public class MonsterHunterWorldInfo : GameBase
     {
+        /// <summary>
+        /// 道具背包容量
+        /// </summary>
+        int ItemBagSize = 0xC80;
+        /// <summary>
+        /// 子弹背包容量
+        /// </summary>
+        int BulletBagSize = 0xC80;
+        /// <summary>
+        /// 素材背包容量
+        /// </summary>
+        int MatBagSize = 0x4E20;
+        /// <summary>
+        /// 饰品背包容量
+        /// </summary>
+        int DecorBagSize = 0x1F30;
         private Pts pts;
         public Pts Pts { 
             get { return pts; }

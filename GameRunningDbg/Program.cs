@@ -1,8 +1,8 @@
 ﻿
 using GameRunningDbg.Core;
 using GameRunningDbg.GameInfo;
+using GameRunningDbg.GameInfo.Model;
 using GameRunningDbg.Manager;
-using GameRunningDbg.Model;
 using HunterPie.Core.System.Windows.Native;
 using System.Diagnostics;
 using System.Runtime.InteropServices;

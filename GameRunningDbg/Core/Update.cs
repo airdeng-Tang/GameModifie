@@ -1,5 +1,5 @@
 ﻿using GameRunningDbg.GameInfo.Game;
-using GameRunningDbg.Model;
+using GameRunningDbg.GameInfo.Model;
 using GameRunningDbg.Tool;
 using System;
 using System.Collections.Generic;

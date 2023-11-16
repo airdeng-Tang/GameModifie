@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameRunningDbg.GameInfo.Base
+namespace GameRunningDbg.GameInfo.Model.MHW
 {
-    public interface InitValue<T>
+    internal class Bag
     {
-        T InitValue(IntPtr jb);
     }
 }

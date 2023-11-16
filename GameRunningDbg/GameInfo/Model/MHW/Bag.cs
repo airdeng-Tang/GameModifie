@@ -1,6 +1,7 @@
 ﻿using GameRunningDbg.JSON.Define.MHW;
 using GameRunningDbg.Manager.MHW;
 using GameRunningDbg.Tool;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         /// <summary>
         /// 素材道具格
         /// </summary>
-        Dictionary<int, Item> MatmBag = new Dictionary<int, Item>();
+        Dictionary<int, Item> MatBag = new Dictionary<int, Item>();
         /// <summary>
         /// 饰品道具格
         /// </summary>
@@ -82,28 +83,22 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             MatFirst = IntPtr.Add(ItemFirst, BulletBagSize);
             DecorFirst = IntPtr.Add(ItemFirst, MatBagSize);
             End = IntPtr.Add(DecorFirst, DecorBagSize) - 0x10;
-            AddItemBag(firstPtr);
+            GetItemBag(firstPtr);
         }
 
-        public void AddAllBag(Item item)
+        public void GetAllBag(Item item)
         {
             ItemCount++;
             item.Key = ItemCount;
             AllItem.Add(ItemCount, item);
-            Console.WriteLine($"Key : {ItemCount}  ::  " +
-                $"道具id : {item.ItemId}  ::  " +
-                $"Id地址 : {Convert.ToString(item.IdMemory.ToInt64(), 16)}  ::  " +
-                $"道具名 : {item.name}  ::  " +
-                $"道具数量 : {item.Value}  ::  " +
-                $"道具地址 : {Convert.ToString(item.ValueMemory.ToInt64(), 16)}  ::  " +
-                $"道具类型 : {item.define?.Target}");
+            Console.Write($"Key : {ItemCount}  ::  道具id : {item.ItemId}  ::  Id地址 : {Convert.ToString(item.IdMemory.ToInt64(), 16)}  ::  道具名 : {item.name}  ::  道具数量 : {item.Value}  ::  道具地址 : {Convert.ToString(item.ValueMemory.ToInt64(), 16)}  ::  道具类型 : {item.define?.Target}\n");
         }
 
-        public void AddItemBag(IntPtr itemPtr)
+        public void GetItemBag(IntPtr itemPtr)
         {
             Item item = new Item();
             item.InitValue(ProcessModel.Instance.exe_p, ref itemPtr);
-            AddAllBag(item);
+            GetAllBag(item);
             if (!ItemBag.ContainsKey(item.ItemId))
             {
                 ItemBag.Add(item.ItemId, item);
@@ -111,19 +106,19 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             ItemBagSize -= 0x10;
             if (ItemBagSize > 0)
             {
-                AddItemBag(itemPtr);
+                GetItemBag(itemPtr);
             }
             else
             {
-                AddBulletBag(itemPtr);
+                GetBulletBag(itemPtr);
             }
         }
 
-        public void AddBulletBag(IntPtr itemPtr)
+        public void GetBulletBag(IntPtr itemPtr)
         {
             Item item = new Item();
             item.InitValue(ProcessModel.Instance.exe_p, ref itemPtr);
-            AddAllBag(item);
+            GetAllBag(item);
             if (!BulletBag.ContainsKey(item.ItemId))
             {
                 BulletBag.Add(item.ItemId, item);
@@ -132,39 +127,39 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             BulletBagSize -= 0x10;
             if (BulletBagSize > 0)
             {
-                AddBulletBag(itemPtr);
+                GetBulletBag(itemPtr);
             }
             else
             {
-                AddMatmBag(itemPtr);
+                GetMatmBag(itemPtr);
             }
         }
 
-        public void AddMatmBag(IntPtr itemPtr)
+        public void GetMatmBag(IntPtr itemPtr)
         {
             Item item = new Item();
             item.InitValue(ProcessModel.Instance.exe_p, ref itemPtr);
-            AddAllBag(item);
-            if (!MatmBag.ContainsKey(item.ItemId))
+            GetAllBag(item);
+            if (!MatBag.ContainsKey(item.ItemId))
             {
-                MatmBag.Add(item.ItemId, item);
+                MatBag.Add(item.ItemId, item);
             }
             MatBagSize -= 0x10;
             if (MatBagSize > 0)
             {
-                AddMatmBag(itemPtr);
+                GetMatmBag(itemPtr);
             }
             else
             {
-                AddDecorBag(itemPtr);
+                GetDecorBag(itemPtr);
             }
         }
 
-        public void AddDecorBag(IntPtr itemPtr)
+        public void GetDecorBag(IntPtr itemPtr)
         {
             Item item = new Item();
             item.InitValue(ProcessModel.Instance.exe_p, ref itemPtr);
-            AddAllBag(item);
+            GetAllBag(item);
             if (!DecorBag.ContainsKey(item.ItemId))
             {
                 DecorBag.Add(item.ItemId, item);
@@ -172,7 +167,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             DecorBagSize -= 0x10;
             if (DecorBagSize > 0)
             {
-                AddDecorBag(itemPtr);
+                GetDecorBag(itemPtr);
             }
             else
             {
@@ -180,14 +175,114 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             }
         }
 
-        private Item GetNextNullItemInAllItem()
+        private Item GetNextNullItemInAllItem(int key,ItemTarget target)
         {
+            Int64 max = GetBagMax(target);
+            if (max < 0)
+            {
+                Console.WriteLine("未知错误:: 未获取道具箱区域限制");
+                return null;
+            }
+            while ((Int64)AllItem[key].IdMemory<max)
+            {
+                if (AllItem[key].ItemId==0)
+                {
+                    return AllItem[key];
+                }
+                key++;
+            }
+            Console.WriteLine("该物品分类的道具箱已满");
             return null;
         }
 
-        public bool AddItem(int id, int value)
+        private Int64 GetBagMax(ItemTarget target)
         {
-            //DataManager.Instance.itemDefine[id].Target;
+            switch (target)
+            {
+                case ItemTarget.物品:
+                    return (Int64)BulletFirst;
+                case ItemTarget.弹药或瓶:
+                    return (Int64)MatFirst;
+                case ItemTarget.素材:
+                    return (Int64)DecorFirst;
+                case ItemTarget.装饰品:
+                    return (Int64)End + 0x10;
+            }
+            return -1;
+        }
+
+        public bool TryAddItem(int id, int value)
+        {
+            ItemDefine define;
+
+            DataManager.Instance.itemDefine.TryGetValue(id, out define);
+            if(define == null)
+            {
+                Console.WriteLine($"无此道具,请重新输入");
+                return false;
+            }
+            Console.WriteLine($"想要添加的道具为: \n" +
+                $"id : {define.Id}  ::  Name : {define.Name}  ::  数量 : {value}\n" +
+                $"是否继续? [Y/n]");
+            string s = Console.ReadLine().ToLower();
+            if(s == "y")
+            {
+                
+            }
+            else if(s == "n") 
+            {
+                Console.WriteLine("已退出");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("输入失败,已退出");
+                return false;
+            }
+
+            switch (define.Target)
+            {
+                case ItemTarget.物品:
+                    AddItem(ItemBag, define, value);
+                    return true;
+                case ItemTarget.弹药或瓶:
+                    AddItem(BulletBag, define, value);
+                    return true;
+                case ItemTarget.素材:
+                    AddItem(MatBag, define, value);
+                    return true;
+                case ItemTarget.装饰品:
+                    AddItem(DecorBag, define, value);
+                    return true;
+                default:
+                    Console.Write("无法添加, 物品类型不匹配");
+                    break;
+            }
+            return false;
+        }
+
+        private bool AddItem(Dictionary<int,Item> bag, ItemDefine define, int value) 
+        {
+            if (bag.TryGetValue(define.Id, out Item item))
+            {
+                item.SetValue(item.Value + value);
+                return true;
+            }
+            else
+            {
+                int key = bag[0].Key;
+                if(bag[0].SetItem(define.Id, value))
+                {
+                    bag[bag[0].ItemId] = bag[0];
+                    Item freeItem = GetNextNullItemInAllItem(key, define.Target);
+                    if (freeItem == null)
+                    {
+                        return false;
+                    }
+                    bag[0] = freeItem;
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -205,6 +300,74 @@ namespace GameRunningDbg.GameInfo.Model.MHW
                 return false;
             }
             return item.SetValue(value);
+        }
+
+        public void ShowAll()
+        {
+            foreach(var v in AllItem)
+            {
+                Console.Write($"Key : {v.Value.Key}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} \n");
+            }
+        }
+
+        public void ShowItems()
+        {
+            foreach(var v in ItemBag)
+            {
+                if (v.Value.ItemId == 0)
+                    break;
+                Console.Write($"Key : {ItemCount}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} ");
+            }
+        }
+
+        public void ShowBullet()
+        {
+            foreach(var v in BulletBag)
+            {
+                if (v.Value.ItemId == 0)
+                    break;
+                Console.Write($"Key : {ItemCount}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} ");
+            }
+        }
+
+        public void ShowMata()
+        {
+            foreach(var v in BulletBag)
+            {
+                if (v.Value.ItemId == 0)
+                    break;
+                Console.Write($"Key : {ItemCount}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} ");
+            }
+        }
+
+        public void ShowMats()
+        {
+            foreach(var v in MatBag)
+            {
+                if (v.Value.ItemId == 0)
+                    break;
+                Console.Write($"Key : {ItemCount}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} ");
+            }
+        }
+
+        public void ShowDecors()
+        {
+            foreach(var v in DecorBag)
+            {
+                if (v.Value.ItemId == 0)
+                    break;
+                Console.Write($"Key : {ItemCount}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} ");
+            }
+        }
+
+
+        public void UpdateInfo()
+        {
+            foreach(var v in AllItem)
+            {
+                v.Value.UpdateInfo();
+            }
+            ShowAll();
         }
     }
 }

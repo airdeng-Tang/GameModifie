@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameRunningDbg")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fe4178741750223d34d93a1edb21d991be797019")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e45cad1e6b9ec9255b1f65ecb81708bb95339aa2")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameRunningDbg")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameRunningDbg")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

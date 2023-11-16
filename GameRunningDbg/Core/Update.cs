@@ -1,5 +1,6 @@
 ﻿using GameRunningDbg.GameInfo.Game;
 using GameRunningDbg.GameInfo.Model;
+using GameRunningDbg.GameInfo.Model.MHW;
 using GameRunningDbg.Tool;
 using System;
 using System.Collections.Generic;
@@ -98,6 +99,18 @@ namespace GameRunningDbg.Core
                         Console.WriteLine($"修改失败");
                         return;
                     }
+                }
+                else if(i == "add item")
+                {
+                    Console.WriteLine("请输入想要增加的道具id:");
+                    int.TryParse(Console.ReadLine(), out int id);
+                    Console.WriteLine("请输入想要增加的道具数量:");
+                    int.TryParse(Console.ReadLine(), out int value);
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Bag.TryAddItem(id, value);
+                }
+                else if( i == "update item")
+                {
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Bag.UpdateInfo();
                 }
             }
             else if (ProcessModel.Instance.game == GAME.HOLLOWKNIGHT)

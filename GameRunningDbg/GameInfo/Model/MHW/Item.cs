@@ -3,6 +3,7 @@ using GameRunningDbg.JSON.Define.MHW;
 using GameRunningDbg.Manager.MHW;
 using HunterPie.Core.System.Windows.Native;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -48,6 +49,17 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         }
 
+        public Item(Item i) : base(i.offsets?.ToArray())
+        {
+            Key = i.Key;
+            define = i.define;
+            ItemId = i.ItemId;
+            IdMemory = i.IdMemory;
+            Value = i.Value;
+            ValueMemory = i.ValueMemory;
+            p = i.p;
+        }
+
         public Item InitValue(IntPtr jz)
         {
             return this;
@@ -81,9 +93,40 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             return Kernel32.WriteProcessMemory(ProcessModel.Instance.exe_p, ValueMemory, pb, sizeof(int), out int _);
         }
 
+        public bool SetItem(int id,int value)
+        {
+            int thisId = ItemId;
+            if (SetId(id))
+            {
+                ItemId = id;
+                if(SetValue(value))
+                {
+                    Value = value;
+                    return true;
+                }
+                else
+                {
+                    SetId(thisId);
+                    ItemId = thisId;
+                }
+            }
+            return false;
+        }
+
         public void Update()
         {
-            
+
+        }
+        
+        public void UpdateInfo() 
+        {
+            byte[] pbPtr = ProcessModel.GenericToByteArray<int>();
+            Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, IdMemory, pbPtr, Marshal.SizeOf<IntPtr>(), out int _);
+            ItemId = BitConverter.ToInt32(pbPtr);
+            define = DataManager.Instance.itemDefine[ItemId];
+            name = define.Name;
+            ValueMemory = IntPtr.Add(IdMemory, 4);
+            Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, ValueMemory, pbPtr, Marshal.SizeOf<IntPtr>(), out int _);
         }
     }
 }

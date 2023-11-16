@@ -44,7 +44,7 @@ namespace GameRunningDbg.Core
         {
             while(true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 ProcessModel.Instance.game_info.game_update();
             }
         }
@@ -67,7 +67,7 @@ namespace GameRunningDbg.Core
         /// <param name="i"></param>
         void InputProc(string i)
         {
-            if(ProcessModel.Instance.name == "MonsterHunterWorld")
+            if(ProcessModel.Instance.game == GAME.MONSTERHUNTERWORLD)
             {
                 if (i == "set golds")
                 {
@@ -100,7 +100,7 @@ namespace GameRunningDbg.Core
                     }
                 }
             }
-            else if (ProcessModel.Instance.name == "hollow_knight")
+            else if (ProcessModel.Instance.game == GAME.HOLLOWKNIGHT)
             {
                 if (i == "set golds")
                 {

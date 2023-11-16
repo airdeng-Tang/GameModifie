@@ -3,6 +3,7 @@ using GameRunningDbg.Core;
 using GameRunningDbg.GameInfo;
 using GameRunningDbg.GameInfo.Model;
 using GameRunningDbg.Manager;
+using GameRunningDbg.Manager.MHW;
 using HunterPie.Core.System.Windows.Native;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -27,6 +28,10 @@ public class Program
 
         ProcessModel.Instance.Init();
         ModuleManager.Instance.Init();
+        if (ProcessModel.Instance.game == GAME.MONSTERHUNTERWORLD)
+        {
+            DataManager.Instance.Init();
+        }
 
         Console.WriteLine(ProcessModel.Instance.name);
         //ProcessModule player_module = null;

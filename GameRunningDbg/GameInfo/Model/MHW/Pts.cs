@@ -34,7 +34,6 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             byte[] pb32 = ProcessModel.GenericToByteArray<int>();
             if (Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, p, pb32, sizeof(int), out int i))
             {
-                PlayerGolds_p = p;
                 Value_New = BitConverter.ToInt32(pb32);
                 if (Value_New != Value)
                 {

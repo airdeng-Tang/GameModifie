@@ -40,14 +40,17 @@ namespace GameRunningDbg.GameInfo.Model.Base
         /// 相关模块基址
         /// </summary>
         public IntPtr CoinModule_p;
-        /// <summary>
-        /// 本资源地址
-        /// </summary>
-        public IntPtr PlayerGolds_p;
 
         public MemoryBase(int[] offset)
         {
-            offsets = new List<int>(offset);
+            if(offset != null)
+            {
+                offsets = new List<int>(offset);
+            }
+            else
+            {
+                offsets = new List<int>();
+            }
         }
     }
 }

@@ -17,9 +17,32 @@ using static GameRunningDbg.JSON.infoSim;
 
 namespace GameRunningDbg.GameInfo.Model
 {
+    /// <summary>
+    /// 游戏模式
+    /// </summary>
+    public enum GAME
+    {
+        /// <summary>
+        /// 无启用游戏模式
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// 怪猎世界
+        /// </summary>
+        MONSTERHUNTERWORLD,
+        /// <summary>
+        /// 空洞骑士
+        /// </summary>
+        HOLLOWKNIGHT,
+    }
+
+
     public class ProcessModel : Singleton<ProcessModel>
     {
         public string name = "";
+
+        public GAME game = GAME.None;
+
         public Process module;
         bool isRunning = false;
 

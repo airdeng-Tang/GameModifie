@@ -26,10 +26,12 @@ namespace GameRunningDbg.GameInfo
             {
                 case 0:
                     ProcessModel.Instance.game_info = new MonsterHunterWorldInfo();
+                    ProcessModel.Instance.game = GAME.MONSTERHUNTERWORLD;
                     return MonsterHunter_World;
 
                 case 1:
                     ProcessModel.Instance.game_info = new HollowKnightInfo();
+                    ProcessModel.Instance.game = GAME.HOLLOWKNIGHT;
                     return HollowKnight;
             }
             return null;

@@ -14,22 +14,6 @@ namespace GameRunningDbg.GameInfo.Game
 {
     public class MonsterHunterWorldInfo : GameBase
     {
-        /// <summary>
-        /// 道具背包容量
-        /// </summary>
-        int ItemBagSize = 0xC80;
-        /// <summary>
-        /// 子弹背包容量
-        /// </summary>
-        int BulletBagSize = 0xC80;
-        /// <summary>
-        /// 素材背包容量
-        /// </summary>
-        int MatBagSize = 0x4E20;
-        /// <summary>
-        /// 饰品背包容量
-        /// </summary>
-        int DecorBagSize = 0x1F30;
         private Pts pts;
         public Pts Pts { 
             get { return pts; }
@@ -39,6 +23,9 @@ namespace GameRunningDbg.GameInfo.Game
                 need_update_objects.Add(value);
             }
         }
+        private Bag bag;
+        public Bag Bag => bag;
+
         public MonsterHunterWorldInfo() 
         {
             need_update_objects = new List<NeedUpdate>();
@@ -65,6 +52,9 @@ namespace GameRunningDbg.GameInfo.Game
             Pts.CoinModule =
                 ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["PtsCoinModule"]];
             Pts.InitValue(ProcessModel.Instance.exe_p);
+
+            bag = new Bag(IntPtr.Add(ProcessModel.Instance.game_info.Golds.p,
+                (int)ProcessModel.Instance.JsonInfo["MonsterHunterWorld"]["FirstItemBagOffsetOfGold"]));
         }
     }
 }

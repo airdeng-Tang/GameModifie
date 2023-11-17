@@ -23,6 +23,7 @@ namespace GameRunningDbg.GameInfo.Game
         public HollowKnightInfo()
         {
             need_update_objects = new List<NeedUpdate>();
+            Player = new HKPlayer(this);
         }
 
         public override void game_update()

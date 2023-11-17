@@ -25,7 +25,7 @@ namespace GameRunningDbg.GameInfo.Game
         public MonsterHunterWorldInfo() 
         {
             need_update_objects = new List<NeedUpdate>();
-            Player = new MHWPlayer();
+            Player = new MHWPlayer(this);
         }
 
         public override void game_update()
@@ -68,7 +68,7 @@ namespace GameRunningDbg.GameInfo.Game
 
         internal static void ShowHelp()
         {
-            Console.Write("set gold  ->  修改金币\nshow item  ->  展示道具箱中全部道具\nupdate item  -> 更新道具箱中数据\nadd item  ->  向道具箱中添加道具\nset pts  ->  修改调查点\n");
+            Console.Write("set gold  ->  修改金币\nadd item  ->  向道具箱中添加道具\nset pts  ->  修改调查点\nshow player info  ->  显示玩家信息\nshow item  ->  展示道具箱中全部道具\nupdate item  -> 更新道具箱中数据\nshow bullet  ->  展示全部子弹\nshow mats  ->  展示全部素材\nshow decors  ->  展示全部饰品\n");
         }
     }
 }

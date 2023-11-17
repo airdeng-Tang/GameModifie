@@ -1,4 +1,5 @@
 ﻿using GameModifier.GameInfo.Model.Base;
+using GameRunningDbg.GameInfo.Game;
 using GameRunningDbg.GameInfo.Model.MHW;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ namespace GameModifier.GameInfo.Model.MHW
 {
     public class MHWPlayer : PlayerBase
     {
+        public MHWPlayer(MonsterHunterWorldInfo monsterHunterWorldInfo)
+        {
+            master = monsterHunterWorldInfo;
+        }
+
         private Pts pts;
         public Pts Pts
         {
@@ -53,7 +59,7 @@ namespace GameModifier.GameInfo.Model.MHW
 
         public void ShowInfo()
         {
-            Console.Write($"HR : {HR.Value}\nMR : {MR.Value}\n金币 : {Golds.Value}\n调查点 : {Pts.Value}");
+            Console.Write($"HR : {HR.Value}\nMR : {MR.Value}\n金币 : {Golds.Value}\n调查点 : {Pts.Value}\n");
         }
     }
 }

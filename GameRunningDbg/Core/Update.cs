@@ -121,9 +121,25 @@ namespace GameRunningDbg.Core
                 {
                     ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.ShowItems();
                 }
+                else if(i == "show bullet")
+                {
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.ShowBullet();
+                }
+                else if(i == "show mats")
+                {
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.ShowMats();
+                }
+                else if(i == "show decors")
+                {
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.ShowDecors();
+                }
                 else if(i == "show player info")
                 {
                     ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.ShowInfo();
+                }
+                else
+                {
+                    Console.Write("无效命令\n");
                 }
             }
             else if (ProcessModel.Instance.game == GAME.HOLLOWKNIGHT)

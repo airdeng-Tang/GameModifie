@@ -123,7 +123,7 @@ namespace GameRunningDbg.Core
                 }
                 else if(i == "show player info")
                 {
-
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.ShowInfo();
                 }
             }
             else if (ProcessModel.Instance.game == GAME.HOLLOWKNIGHT)

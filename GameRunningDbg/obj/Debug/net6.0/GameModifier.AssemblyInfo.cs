@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("GameRunningDbg")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("GameModifier")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("GameRunningDbg")]
-[assembly: System.Reflection.AssemblyTitleAttribute("GameRunningDbg")]
+[assembly: System.Reflection.AssemblyProductAttribute("GameModifier")]
+[assembly: System.Reflection.AssemblyTitleAttribute("GameModifier")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // 由 MSBuild WriteCodeFragment 类生成。

@@ -1,4 +1,6 @@
-﻿using GameRunningDbg.GameInfo.Base;
+﻿using GameModifier.GameInfo.Model.HK;
+using GameModifier.GameInfo.Model.MHW;
+using GameRunningDbg.GameInfo.Base;
 using GameRunningDbg.GameInfo.Model;
 using GameRunningDbg.GameInfo.Model.Base;
 using GameRunningDbg.Manager;
@@ -13,6 +15,11 @@ namespace GameRunningDbg.GameInfo.Game
 {
     public class HollowKnightInfo : GameBase
     {
+        public HKPlayer Player
+        {
+            get { return (HKPlayer)player; }
+            set { player = value; }
+        }
         public HollowKnightInfo()
         {
             need_update_objects = new List<NeedUpdate>();
@@ -34,7 +41,12 @@ namespace GameRunningDbg.GameInfo.Game
                 ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldCoinModule"]];
 
             golds.InitValue(ProcessModel.Instance.exe_p);
-            ProcessModel.Instance.game_info.Golds = golds;
+            Player.Golds = golds;
+        }
+
+        internal static void ShowHelp()
+        {
+            Console.Write("set gold  ->  修改金币\n");
         }
     }
 }

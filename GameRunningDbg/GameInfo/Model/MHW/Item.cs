@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GameRunningDbg.GameInfo.Model.MHW
 {
-    public class Item : MemoryBase, NeedUpdate, InitValue<Item>
+    public class Item :  NeedUpdate, InitValue<Item>
     {
         /// <summary>
         /// 在道具箱中格子对应的key值
@@ -38,18 +38,23 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         public IntPtr ValueMemory = IntPtr.Zero;
 
         /// <summary>
+        /// 内存地址
+        /// </summary>
+        public IntPtr p;
+
+        /// <summary>
         /// 道具名称
         /// </summary>
         public string? name;
 
         public ItemDefine define;
 
-        public Item(int[] offset = null) : base(offset)
+        public Item(int[] offset = null) 
         {
 
         }
 
-        public Item(Item i) : base(i.offsets?.ToArray())
+        public Item(Item i)
         {
             Key = i.Key;
             define = i.define;

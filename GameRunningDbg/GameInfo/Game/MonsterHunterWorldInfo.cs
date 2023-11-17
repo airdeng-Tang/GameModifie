@@ -1,4 +1,6 @@
-﻿using GameRunningDbg.GameInfo.Base;
+﻿using GameModifier.GameInfo.Model.Base;
+using GameModifier.GameInfo.Model.MHW;
+using GameRunningDbg.GameInfo.Base;
 using GameRunningDbg.GameInfo.Model;
 using GameRunningDbg.GameInfo.Model.Base;
 using GameRunningDbg.GameInfo.Model.MHW;
@@ -14,21 +16,16 @@ namespace GameRunningDbg.GameInfo.Game
 {
     public class MonsterHunterWorldInfo : GameBase
     {
-        private Pts pts;
-        public Pts Pts { 
-            get { return pts; }
-            set
-            {
-                pts = value;
-                need_update_objects.Add(value);
-            }
+        public MHWPlayer Player
+        {
+            get { return (MHWPlayer)player; }
+            set { player = value; }
         }
-        private Bag bag;
-        public Bag Bag => bag;
 
         public MonsterHunterWorldInfo() 
         {
             need_update_objects = new List<NeedUpdate>();
+            Player = new MHWPlayer();
         }
 
         public override void game_update()
@@ -41,20 +38,37 @@ namespace GameRunningDbg.GameInfo.Game
 
         public override void init_info()
         {
-            Golds = 
+            Player.Golds = 
                 new Gold((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldsMemoryOffset"]);
-            Golds.CoinModule =
+            Player.Golds.CoinModule =
                 ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldCoinModule"]];
-            Golds.InitValue(ProcessModel.Instance.exe_p);
+            Player.Golds.InitValue(ProcessModel.Instance.exe_p);
 
-            Pts =
+            Player.Pts =
                 new Pts((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["PtsMemoryOffset"]);
-            Pts.CoinModule =
+            Player.Pts.CoinModule =
                 ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["PtsCoinModule"]];
-            Pts.InitValue(ProcessModel.Instance.exe_p);
+            Player.Pts.InitValue(ProcessModel.Instance.exe_p);
 
-            bag = new Bag(IntPtr.Add(ProcessModel.Instance.game_info.Golds.p,
-                (int)ProcessModel.Instance.JsonInfo["MonsterHunterWorld"]["FirstItemBagOffsetOfGold"]));
+            Player.HR =
+                new HrLevel((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["HrMemoryOffset"]);
+            Player.HR.CoinModule =
+                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["HrCoinModule"]];
+            Player.HR.InitValue(ProcessModel.Instance.exe_p);
+
+            Player.MR =
+                new MrLevel((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["MrMemoryOffset"]);
+            Player.MR.CoinModule =
+                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["MrCoinModule"]];
+            Player.MR.InitValue(ProcessModel.Instance.exe_p);
+
+            Player.Bag = new Bag(IntPtr.Add(Player.Golds.p,
+                (int)Bag.FirstItemBagOffsetOfGold));
+        }
+
+        internal static void ShowHelp()
+        {
+            Console.Write("set gold  ->  修改金币\nshow item  ->  展示道具箱中全部道具\nupdate item  -> 更新道具箱中数据\nadd item  ->  向道具箱中添加道具\nset pts  ->  修改调查点\n");
         }
     }
 }

@@ -68,13 +68,18 @@ namespace GameRunningDbg.Core
         /// <param name="i"></param>
         void InputProc(string i)
         {
+            if(i == "help")
+            {
+                ShowHelp();
+                return;
+            }
             if(ProcessModel.Instance.game == GAME.MONSTERHUNTERWORLD)
             {
                 if (i == "set golds")
                 {
                     Console.WriteLine("请输入想要更改的金币 :");
                     int.TryParse(Console.ReadLine(), out int new_value);
-                    if (((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Golds.SetValue(new_value))
+                    if (((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Golds.SetValue(new_value))
                     {
                         Console.WriteLine($"修改成功");
                         return;
@@ -89,7 +94,7 @@ namespace GameRunningDbg.Core
                 {
                     Console.WriteLine("请输入想要更改的调查点 :");
                     int.TryParse(Console.ReadLine(), out int new_value);
-                    if (((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Pts.SetValue(new_value))
+                    if (((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Pts.SetValue(new_value))
                     {
                         Console.WriteLine($"修改成功");
                         return;
@@ -106,11 +111,19 @@ namespace GameRunningDbg.Core
                     int.TryParse(Console.ReadLine(), out int id);
                     Console.WriteLine("请输入想要增加的道具数量:");
                     int.TryParse(Console.ReadLine(), out int value);
-                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Bag.TryAddItem(id, value);
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.TryAddItem(id, value);
                 }
                 else if( i == "update item")
                 {
-                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Bag.UpdateInfo();
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.UpdateInfo();
+                }
+                else if(i == "show item")
+                {
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.ShowItems();
+                }
+                else if(i == "show player info")
+                {
+
                 }
             }
             else if (ProcessModel.Instance.game == GAME.HOLLOWKNIGHT)
@@ -119,7 +132,7 @@ namespace GameRunningDbg.Core
                 {
                     Console.WriteLine("请输入想要更改的金币 :");
                     int.TryParse(Console.ReadLine(), out int new_value);
-                    if (ProcessModel.Instance.game_info.Golds.SetValue(new_value))
+                    if (((HollowKnightInfo)ProcessModel.Instance.game_info).Player.Golds.SetValue(new_value))
                     {
                         Console.WriteLine($"修改成功");
                         return;
@@ -130,6 +143,22 @@ namespace GameRunningDbg.Core
                         return;
                     }
                 }
+            }
+        }
+
+        private void ShowHelp()
+        {
+            switch(ProcessModel.Instance.game)
+            {
+                case GAME.HOLLOWKNIGHT:
+                    HollowKnightInfo.ShowHelp();
+                    break;
+                case GAME.MONSTERHUNTERWORLD:
+                    MonsterHunterWorldInfo.ShowHelp();
+                    break;
+                default:
+                    Console.WriteLine("请先确认游戏");
+                    break;
             }
         }
     }

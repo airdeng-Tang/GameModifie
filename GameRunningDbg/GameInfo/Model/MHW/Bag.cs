@@ -35,7 +35,10 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         /// </summary>
         Dictionary<int, Item> DecorBag = new Dictionary<int, Item>();
 
-
+        /// <summary>
+        /// 道具箱首格相对金币地址的内存偏移
+        /// </summary>
+        public static readonly int FirstItemBagOffsetOfGold = 0x3897C;
         /// <summary>
         /// 道具背包容量
         /// </summary>

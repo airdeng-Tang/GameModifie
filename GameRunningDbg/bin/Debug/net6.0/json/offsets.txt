@@ -1,0 +1,22 @@
+{
+  "hollow_knight":{
+    "GoldCoinModule": "UnityPlayer.dll",
+    "GoldsMemoryOffset": [0x019B8BE0, 0x10, 0x88, 0x28, 0x20, 0xA0, 0x30, 0x1C4],
+  },
+  "MonsterHunterWorld": {
+    "GoldCoinModule": "MonsterHunterWorld.exe",
+    "PtsCoinModule": "MonsterHunterWorld.exe",
+    "HrCoinModule": "MonsterHunterWorld.exe",
+    "HrExpCoinModule": "MonsterHunterWorld.exe",
+    "MrCoinModule": "MonsterHunterWorld.exe",
+    "MrExpCoinModule": "MonsterHunterWorld.exe",
+    "TimeCoinModule": "MonsterHunterWorld.exe",
+    "GoldsMemoryOffset": [0x05011710, 0xA8, 0x94],
+    "PtsMemoryOffset": [0x05011710, 0xA8, 0x98],
+    "HrMemoryOffset": [0x05011710, 0xA8, 0x90],
+    "HrExpMemoryOffset": [0x05011710, 0xA8, 0x9C],    
+    "MrMemoryOffset": [0x05011710, 0xA8, 0xD4],
+    "MrExpMemoryOffset": [0x05011710, 0xA8, 0xD8],
+    "TimeMemoryOffset": [0x05011710, 0xA8, 0xA0],
+  }
+}

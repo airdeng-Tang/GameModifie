@@ -6,6 +6,8 @@ using GameRunningDbg.GameInfo.Model.Base;
 using GameRunningDbg.GameInfo.Model.MHW;
 using GameRunningDbg.JSON;
 using GameRunningDbg.Manager;
+using GameRunningDbg.Manager.MHW;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,27 +41,27 @@ namespace GameRunningDbg.GameInfo.Game
         public override void init_info()
         {
             Player.Golds = 
-                new Gold((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldsMemoryOffset"]);
+                new Gold(((JArray)DataManager.Instance.offsets[ProcessModel.Instance.name]["GoldsMemoryOffset"]).Select(x => (int)x).ToArray());
             Player.Golds.CoinModule =
-                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldCoinModule"]];
+                ModuleManager.Instance.modules[(string)DataManager.Instance.offsets[ProcessModel.Instance.name]["GoldCoinModule"]];
             Player.Golds.InitValue(ProcessModel.Instance.exe_p);
 
             Player.Pts =
-                new Pts((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["PtsMemoryOffset"]);
+                new Pts(((JArray)DataManager.Instance.offsets[ProcessModel.Instance.name]["PtsMemoryOffset"]).Select(x => (int)x).ToArray());
             Player.Pts.CoinModule =
-                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["PtsCoinModule"]];
+                ModuleManager.Instance.modules[(string)DataManager.Instance.offsets[ProcessModel.Instance.name]["PtsCoinModule"]];
             Player.Pts.InitValue(ProcessModel.Instance.exe_p);
 
             Player.HR =
-                new HrLevel((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["HrMemoryOffset"]);
+                new HrLevel(((JArray)DataManager.Instance.offsets[ProcessModel.Instance.name]["HrMemoryOffset"]).Select(x => (int)x).ToArray());
             Player.HR.CoinModule =
-                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["HrCoinModule"]];
+                ModuleManager.Instance.modules[(string)DataManager.Instance.offsets[ProcessModel.Instance.name]["HrCoinModule"]];
             Player.HR.InitValue(ProcessModel.Instance.exe_p);
 
             Player.MR =
-                new MrLevel((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["MrMemoryOffset"]);
+                new MrLevel(((JArray)DataManager.Instance.offsets[ProcessModel.Instance.name]["MrMemoryOffset"]).Select(x => (int)x).ToArray());
             Player.MR.CoinModule =
-                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["MrCoinModule"]];
+                ModuleManager.Instance.modules[(string)DataManager.Instance.offsets[ProcessModel.Instance.name]["MrCoinModule"]];
             Player.MR.InitValue(ProcessModel.Instance.exe_p);
 
             Player.Bag = new Bag(IntPtr.Add(Player.Golds.p,

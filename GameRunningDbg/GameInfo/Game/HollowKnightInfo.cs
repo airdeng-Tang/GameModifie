@@ -4,6 +4,7 @@ using GameRunningDbg.GameInfo.Base;
 using GameRunningDbg.GameInfo.Model;
 using GameRunningDbg.GameInfo.Model.Base;
 using GameRunningDbg.Manager;
+using GameRunningDbg.Manager.MHW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,10 +37,10 @@ namespace GameRunningDbg.GameInfo.Game
 
         public override void init_info()
         {
-            Gold golds = new Gold((int[])ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldsMemoryOffset"]);
+            Gold golds = new Gold((int[])DataManager.Instance.offsets[ProcessModel.Instance.name]["GoldsMemoryOffset"]);
 
             golds.CoinModule = 
-                ModuleManager.Instance.modules[(string)ProcessModel.Instance.JsonInfo[ProcessModel.Instance.name]["GoldCoinModule"]];
+                ModuleManager.Instance.modules[(string)DataManager.Instance.offsets[ProcessModel.Instance.name]["GoldCoinModule"]];
 
             golds.InitValue(ProcessModel.Instance.exe_p);
             Player.Golds = golds;

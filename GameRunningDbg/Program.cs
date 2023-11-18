@@ -76,6 +76,8 @@ public class Program
 
                 ProcessModel.Instance.SetPlayer(jb);
 
+                ProcessModel.Instance.game_info.ShowHelp();
+
                 Update update = new Update();
             }
         }

@@ -18,5 +18,7 @@ namespace GameRunningDbg.GameInfo.Base
         public abstract void game_update();
 
         public abstract void init_info();
+
+        public abstract void ShowHelp();
     }
 }

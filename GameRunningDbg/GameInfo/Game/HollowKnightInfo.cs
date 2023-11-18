@@ -46,7 +46,7 @@ namespace GameRunningDbg.GameInfo.Game
             Player.Golds = golds;
         }
 
-        internal static void ShowHelp()
+        public override void ShowHelp()
         {
             Console.Write("set gold  ->  修改金币\n");
         }

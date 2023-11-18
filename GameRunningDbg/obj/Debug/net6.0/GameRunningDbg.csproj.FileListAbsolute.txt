@@ -13,3 +13,6 @@ D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.pdb
 D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.genruntimeconfig.cache
 D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\ref\GameRunningDbg.dll
 D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.sourcelink.json
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.csproj.AssemblyReference.cache
+D:\巨硬\C#\GameRunningDbg\GameRunningDbg\obj\Debug\net6.0\GameRunningDbg.csproj.CopyComplete

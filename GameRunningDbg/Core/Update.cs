@@ -137,6 +137,10 @@ namespace GameRunningDbg.Core
                 {
                     ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.ShowInfo();
                 }
+                else if(i == "show all")
+                {
+                    ((MonsterHunterWorldInfo)ProcessModel.Instance.game_info).Player.Bag.ShowAll();
+                }
                 else
                 {
                     Console.Write("无效命令\n");

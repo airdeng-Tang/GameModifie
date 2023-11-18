@@ -268,7 +268,15 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         {
             if (bag.TryGetValue(define.Id, out Item item))
             {
-                item.SetValue(item.Value + value);
+                if (item.SetValue(item.Value+value))
+                {
+                    item.Value += value;
+                }
+                else
+                {
+                    item.SetValue(item.Value);
+                }
+                item.ShowThisItem();
                 return true;
             }
             else
@@ -309,7 +317,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         {
             foreach(var v in AllItem)
             {
-                Console.Write($"Key : {v.Value.Key}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} \n");
+                v.Value.ShowThisItem();
             }
         }
 
@@ -319,7 +327,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             {
                 if (v.Value.ItemId == 0)
                     break;
-                Console.Write($"Key : {v.Value.Key}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} \n");
+                v.Value.ShowThisItem();
             }
         }
 
@@ -329,7 +337,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             {
                 if (v.Value.ItemId == 0)
                     break;
-                Console.Write($"Key : {v.Value.Key}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} \n");
+                v.Value.ShowThisItem();
             }
         }
 
@@ -339,7 +347,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             {
                 if (v.Value.ItemId == 0)
                     break;
-                Console.Write($"Key : {v.Value.Key}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} \n");
+                v.Value.ShowThisItem();
             }
         }
 
@@ -349,7 +357,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             {
                 if (v.Value.ItemId == 0)
                     break;
-                Console.Write($"Key : {v.Value.Key}  ::  道具id : {v.Value.ItemId}  ::  Id地址 : {Convert.ToString(v.Value.IdMemory.ToInt64(), 16)}  ::  道具名 : {v.Value.name}  ::  道具数量 : {v.Value.Value} \n");
+                v.Value.ShowThisItem();
             }
         }
 

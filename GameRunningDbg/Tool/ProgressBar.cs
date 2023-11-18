@@ -57,8 +57,10 @@ namespace AIDemo
         /// <param name="x">光标列位置</param>
         /// <param name="y">光标行位置</param>
         /// <param name="i">增加的进度(百分制)</param>
-        public void UpdateBar(int x, int y, int i = 1)
+        public void UpdateBar(int i = 1)
         {
+            int x = Console.CursorLeft;
+            int y = Console.CursorTop;
             while (i>0)
             {
                 AddProgress();
@@ -67,7 +69,7 @@ namespace AIDemo
             Console.SetCursorPosition(x, y);
         }
 
-        public void AddProgress()
+        private void AddProgress()
         {
             if (!isEnd)
             {

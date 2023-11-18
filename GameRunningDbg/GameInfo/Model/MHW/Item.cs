@@ -107,6 +107,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
                 if(SetValue(value))
                 {
                     Value = value;
+                    ShowThisItem();
                     return true;
                 }
                 else
@@ -127,6 +128,12 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             name = define.Name;
             ValueMemory = IntPtr.Add(IdMemory, 4);
             Kernel32.ReadProcessMemory(ProcessModel.Instance.exe_p, ValueMemory, pbPtr, Marshal.SizeOf<IntPtr>(), out int _);
+            Value = BitConverter.ToInt32(pbPtr);
+        }
+
+        public void ShowThisItem()
+        {
+            Console.Write($"Key : {Key}  ::  道具id : {ItemId}  ::  Id地址 : {Convert.ToString(IdMemory.ToInt64(), 16)}  ::  道具名 : {name}  ::  道具数量 : {Value} \n");
         }
     }
 }

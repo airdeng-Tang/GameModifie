@@ -5,26 +5,26 @@
 *.v2
 /.vs/GameModifier
 *.cache
-/GameRunningDbg/bin/Debug/net6.0/Newtonsoft.Json.dll
-/GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.pdb
-/GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.exe
-/GameRunningDbg/bin/Debug/net6.0/GameModifier.runtimeconfig.json
-/GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.deps.json
-/GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.dll
-/GameRunningDbg/bin/Debug/net6.0/GameModifier.pdb
-/GameRunningDbg/bin/Debug/net6.0/GameModifier.deps.json
-/GameRunningDbg/bin/Debug/net6.0/GameModifier.dll
-/GameRunningDbg/bin/Debug/net6.0/GameModifier.exe
-/GameRunningDbg/obj/Debug/net6.0/ref/GameModifier.dll
-/GameRunningDbg/obj/Debug/net6.0/ref/GameRunningDbg.dll
-/GameRunningDbg/obj/Debug/net6.0/refint/GameModifier.dll
-/GameRunningDbg/obj/Debug/net6.0/refint/GameRunningDbg.dll
-*.BuildWithSkipAnalyzers
-/GameRunningDbg/obj/Debug/net6.0/GameModifier.csproj.FileListAbsolute.txt
-/GameRunningDbg/obj/Debug/net6.0/GameModifier.dll
-/GameRunningDbg/obj/Debug/net6.0/apphost.exe
-/GameRunningDbg/obj/Debug/net6.0/GameModifier.GeneratedMSBuildEditorConfig.editorconfig
-/GameRunningDbg/obj/Debug/net6.0/GameModifier.pdb
+# /GameRunningDbg/bin/Debug/net6.0/Newtonsoft.Json.dll
+# /GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.pdb
+# /GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.exe
+# /GameRunningDbg/bin/Debug/net6.0/GameModifier.runtimeconfig.json
+# /GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.deps.json
+# /GameRunningDbg/bin/Debug/net6.0/GameRunningDbg.dll
+# /GameRunningDbg/bin/Debug/net6.0/GameModifier.pdb
+# /GameRunningDbg/bin/Debug/net6.0/GameModifier.deps.json
+# /GameRunningDbg/bin/Debug/net6.0/GameModifier.dll
+# /GameRunningDbg/bin/Debug/net6.0/GameModifier.exe
+# /GameRunningDbg/obj/Debug/net6.0/ref/GameModifier.dll
+# /GameRunningDbg/obj/Debug/net6.0/ref/GameRunningDbg.dll
+# /GameRunningDbg/obj/Debug/net6.0/refint/GameModifier.dll
+# /GameRunningDbg/obj/Debug/net6.0/refint/GameRunningDbg.dll
+# *.BuildWithSkipAnalyzers
+# /GameRunningDbg/obj/Debug/net6.0/GameModifier.csproj.FileListAbsolute.txt
+# /GameRunningDbg/obj/Debug/net6.0/GameModifier.dll
+# /GameRunningDbg/obj/Debug/net6.0/apphost.exe
+# /GameRunningDbg/obj/Debug/net6.0/GameModifier.GeneratedMSBuildEditorConfig.editorconfig
+# /GameRunningDbg/obj/Debug/net6.0/GameModifier.pdb
 /GameRunningDbg/obj/GameModifier.csproj.nuget.g.targets
 /GameRunningDbg/obj/GameRunningDbg.csproj.nuget.dgspec.json
 /GameRunningDbg/GameModifier.csproj

@@ -83,8 +83,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         {
             ItemFirst = firstPtr;
             BulletFirst = IntPtr.Add(ItemFirst, ItemBagSize);
-            MatFirst = IntPtr.Add(ItemFirst, BulletBagSize);
-            DecorFirst = IntPtr.Add(ItemFirst, MatBagSize);
+            MatFirst = IntPtr.Add(BulletFirst, BulletBagSize);
+            DecorFirst = IntPtr.Add(MatFirst, MatBagSize);
             End = IntPtr.Add(DecorFirst, DecorBagSize) - 0x10;
             GetItemBag(firstPtr);
         }

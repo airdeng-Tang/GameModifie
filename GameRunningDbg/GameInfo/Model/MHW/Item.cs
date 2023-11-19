@@ -107,6 +107,9 @@ namespace GameRunningDbg.GameInfo.Model.MHW
                 if(SetValue(value))
                 {
                     Value = value;
+                    define = DataManager.Instance.itemDefine[ItemId];
+                    name = define.Name;
+                    ValueMemory = IntPtr.Add(IdMemory, 4);
                     ShowThisItem();
                     return true;
                 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameModifier")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4fc8f8101db88e8d090eb6771805f503363302d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de89c03883cb584208bc0dba9053e159d53aad38")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameModifier")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameModifier")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

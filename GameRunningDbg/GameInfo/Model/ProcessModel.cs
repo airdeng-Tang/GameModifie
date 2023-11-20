@@ -39,6 +39,8 @@ namespace GameRunningDbg.GameInfo.Model
 
     public class ProcessModel : Singleton<ProcessModel>
     {
+        public static readonly string ver = "0.1.15";
+
         public string name = "";
 
         public GAME game = GAME.None;

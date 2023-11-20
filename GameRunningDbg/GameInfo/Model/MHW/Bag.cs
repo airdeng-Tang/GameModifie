@@ -82,11 +82,28 @@ namespace GameRunningDbg.GameInfo.Model.MHW
         public Bag(IntPtr firstPtr)
         {
             ItemFirst = firstPtr;
+            Init();
+        }
+
+        private void Init()
+        {
+            AllItem = new Dictionary<int, Item>();
+            ItemCount = 0;
+
+            ItemBag = new Dictionary<int, Item>();
+            BulletBag = new Dictionary<int, Item>();
+            MatBag = new Dictionary<int, Item>();
+            DecorBag = new Dictionary<int, Item>();
+
+            ItemBagSize = 0xC80;
             BulletFirst = IntPtr.Add(ItemFirst, ItemBagSize);
+            BulletBagSize = 0xC80;
             MatFirst = IntPtr.Add(BulletFirst, BulletBagSize);
+            MatBagSize = 0x4E20;
             DecorFirst = IntPtr.Add(MatFirst, MatBagSize);
+            DecorBagSize = 0x1F30;
             End = IntPtr.Add(DecorFirst, DecorBagSize) - 0x10;
-            GetItemBag(firstPtr);
+            GetItemBag(ItemFirst);
         }
 
         public void GetAllBag(Item item)
@@ -94,7 +111,7 @@ namespace GameRunningDbg.GameInfo.Model.MHW
             ItemCount++;
             item.Key = ItemCount;
             AllItem.Add(ItemCount, item);
-            Console.Write($"Key : {ItemCount}  ::  道具id : {item.ItemId}  ::  Id地址 : {Convert.ToString(item.IdMemory.ToInt64(), 16)}  ::  道具名 : {item.name}  ::  道具数量 : {item.Value}  ::  道具地址 : {Convert.ToString(item.ValueMemory.ToInt64(), 16)}  ::  道具类型 : {item.define?.Target}\n");
+            //Console.Write($"Key : {ItemCount}  ::  道具id : {item.ItemId}  ::  Id地址 : {Convert.ToString(item.IdMemory.ToInt64(), 16)}  ::  道具名 : {item.name}  ::  道具数量 : {item.Value}  ::  道具地址 : {Convert.ToString(item.ValueMemory.ToInt64(), 16)}  ::  道具类型 : {item.define?.Target}\n");
         }
 
         public void GetItemBag(IntPtr itemPtr)
@@ -216,6 +233,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public bool TryAddItem(int id, int value)
         {
+            UpdateInfo();
+            Thread.Sleep(2);
             ItemDefine define;
 
             DataManager.Instance.itemDefine.TryGetValue(id, out define);
@@ -315,7 +334,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void ShowAll()
         {
-            foreach(var v in AllItem)
+            UpdateInfo();
+            foreach (var v in AllItem)
             {
                 v.Value.ShowThisItem();
             }
@@ -323,7 +343,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void ShowItems()
         {
-            foreach(var v in ItemBag)
+            UpdateInfo();
+            foreach (var v in ItemBag)
             {
                 if (v.Value.ItemId == 0)
                     break;
@@ -333,7 +354,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void ShowBullet()
         {
-            foreach(var v in BulletBag)
+            UpdateInfo();
+            foreach (var v in BulletBag)
             {
                 if (v.Value.ItemId == 0)
                     break;
@@ -343,7 +365,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void ShowMats()
         {
-            foreach(var v in MatBag)
+            UpdateInfo();
+            foreach (var v in MatBag)
             {
                 if (v.Value.ItemId == 0)
                     break;
@@ -353,7 +376,8 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void ShowDecors()
         {
-            foreach(var v in DecorBag)
+            UpdateInfo();
+            foreach (var v in DecorBag)
             {
                 if (v.Value.ItemId == 0)
                     break;
@@ -364,11 +388,12 @@ namespace GameRunningDbg.GameInfo.Model.MHW
 
         public void UpdateInfo()
         {
-            foreach(var v in AllItem)
-            {
-                v.Value.Update();
-            }
-            ShowAll();
+            //foreach(var v in AllItem)
+            //{
+            //    v.Value.Update();
+            //}
+            //ShowAll();
+            Init();
         }
     }
 }

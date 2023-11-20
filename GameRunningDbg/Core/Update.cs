@@ -168,18 +168,6 @@ namespace GameRunningDbg.Core
 
         private void ShowHelp()
         {
-            //switch(ProcessModel.Instance.game)
-            //{
-            //    case GAME.HOLLOWKNIGHT:
-            //        HollowKnightInfo.ShowHelp();
-            //        break;
-            //    case GAME.MONSTERHUNTERWORLD:
-            //        MonsterHunterWorldInfo.ShowHelp();
-            //        break;
-            //    default:
-            //        Console.WriteLine("请先确认游戏");
-            //        break;
-            //}
             if(ProcessModel.Instance.game_info != null)
             {
                 ProcessModel.Instance.game_info.ShowHelp();

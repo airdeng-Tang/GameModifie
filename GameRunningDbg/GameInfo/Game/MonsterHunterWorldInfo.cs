@@ -66,6 +66,7 @@ namespace GameRunningDbg.GameInfo.Game
 
             Player.Bag = new Bag(IntPtr.Add(Player.Golds.p,
                 (int)Bag.FirstItemBagOffsetOfGold));
+            Player.Bag.ShowAll();
         }
 
         public override void ShowHelp()
